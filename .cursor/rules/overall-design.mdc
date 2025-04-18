@@ -1,0 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Your rule content
+
+- when we proceed on the project. please always remember to look at [implementation_plan.md](mdc:implementation_plan.md) 
+- The overall design of the system is in [prd.md](mdc:prd.md) We should try to stick to the design philosophy.
+- Our file structure should try best to follow [file_structure.md](mdc:file_structure.md)
+- Use the technology as specified in [tech_stack.md](mdc:tech_stack.md)
+- we will develop our system based on following the [implementation_plan.md](mdc:implementation_plan.md) [task_list.md](mdc:task_list.md). After finishing each step, we will update [task_list.md](mdc:task_list.md)
+- Remember after finishing each major task in [tasklist.md](mdc:tasklist.md), we should conduct unit testing.

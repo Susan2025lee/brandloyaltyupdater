@@ -1,0 +1,10 @@
+python-dotenv
+pytest
+pytest-mock
+openai
+chromadb
+streamlit
+pdfplumber
+markdown-it-py
+tiktoken
+PyGithub # or GitPython, choose one later if needed 

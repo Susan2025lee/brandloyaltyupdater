@@ -1,0 +1,48 @@
+# Environment variables
+.env
+
+# Configuration Files
+config.json
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+virtualenv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Operating system specific files
+.DS_Store
+Thumbs.db
+
+# Data files
+data/vector_store/
+data/processed/
+# data/input/ # Optional: Uncomment if you don't want to commit input files
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+*.vscodeignore
+
+# Test output
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints 
