@@ -53,14 +53,11 @@ This plan outlines the key stages for developing the Proof of Concept (PoC).
 
 *   **Goal:** Connect all components, build the review UI, implement report updates, and set up basic orchestration.
 *   **Tasks:**
-    *   Develop main script (`main.py` or `run_pipeline.py`) to orchestrate the flow: ingest -> embed -> index -> retrieve -> assess/generate.
-    *   Develop GitHub integration module (`github_utils.py`) to:
-        *   Fetch the latest `data/core_files/baseline_report.md`.
-        *   Commit approved updates back to the repository (updating `data/core_files/baseline_report.md`).
+    *   Develop main script (`main.py` or `run_pipeline.py`) to orchestrate the flow: load local report -> ingest -> embed -> index -> retrieve -> assess/generate -> store updates for UI.
     *   Build Streamlit application (`app.py`) to:
         *   Display proposed updates (generated text + source).
         *   Provide 'Approve' / 'Reject' buttons.
-        *   On 'Approve', trigger the GitHub commit function.
+        *   On 'Approve', trigger the update of the local `data/core_files/baseline_report.md` (or alternative mechanism).
     *   Set up simple orchestration (e.g., a shell script run by Cron) to execute the main pipeline script periodically.
-*   **Testing:** Integration tests for the full pipeline. Test the Streamlit UI functionality. Test the GitHub commit process.
-*   **Outcome:** A functional PoC system that processes new documents, proposes significant updates via a UI, and updates the master report (`data/core_files/baseline_report.md`) on GitHub upon approval. 
+*   **Testing:** Integration tests for the full pipeline. Test the Streamlit UI functionality. Test the local report update process.
+*   **Outcome:** A functional PoC system that processes new documents, proposes significant updates via a UI, and updates the master report (`data/core_files/baseline_report.md`) locally upon approval. 

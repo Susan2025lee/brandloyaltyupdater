@@ -5,7 +5,7 @@
 *   **Automate Insight Extraction:** Extract potentially relevant information regarding predefined brand loyalty metrics from incoming documents (Markdown, PDF).
 *   **Assess Significance & Novelty:** Evaluate extracted information against the current baseline report to determine if it represents a genuinely new and meaningful insight, filtering out redundant or trivial updates.
 *   **Generate Update Summaries:** For significant and novel insights, generate concise, coherent update paragraphs contextualized for the specific brand loyalty metric. Summaries must cite the source document.
-*   **Maintain Living Report:** Integrate approved update paragraphs into a master Markdown report (`data/core_files/baseline_report.md`), tracking changes using version control (GitHub).
+*   **Maintain Living Report:** Integrate approved update paragraphs into a master Markdown report (`data/core_files/baseline_report.md`), managing the file locally.
 *   **Facilitate Review:** Provide a simple User Interface (UI) for human review and approval/rejection of proposed updates before they are merged into the master report.
 
 ### 2. Scope (Proof of Concept)
@@ -22,7 +22,7 @@
         2.  Assess novelty and significance based on predefined criteria (potentially embedded in the prompt or as a separate step).
         3.  Generate a draft update paragraph *only if* the information is deemed significant and novel.
         4.  Ensure source attribution in the generated paragraph.
-*   **Output:** Proposed update paragraphs displayed in a review UI. Approved updates are automatically committed to the `data/core_files/baseline_report.md` on GitHub.
+*   **Output:** Proposed update paragraphs displayed in a review UI. Approved updates modify the local `data/core_files/baseline_report.md`.
 *   **Metrics:** Focus on the brand loyalty metrics defined in `data/core_files/brandloyalty.md`.
 *   **Target Company:** Initial focus on Xiaomi, using the initial version of `data/core_files/baseline_report.md`.
 *   **Technology:** Utilize the specific PoC tech stack defined in `tech_stack.md`.
@@ -42,5 +42,5 @@
 *   **End-to-End Flow:** The system successfully ingests, processes, and proposes updates for at least one new input report against the baseline report.
 *   **Meaningful Updates:** Generates relevant, novel, and significant update paragraphs (as judged by a human reviewer) for at least two different brand loyalty metrics.
 *   **Review UI:** The Streamlit UI correctly loads and displays proposed updates, allowing for human approval/rejection.
-*   **Version Control:** Approved updates are successfully committed to the `data/core_files/baseline_report.md` file on GitHub.
+*   **Local Report Update:** Approved updates are successfully applied to the local `data/core_files/baseline_report.md` file.
 *   **Performance:** The end-to-end pipeline for processing 10 typical input reports completes within a reasonable timeframe (e.g., < 15 minutes) for PoC purposes. 

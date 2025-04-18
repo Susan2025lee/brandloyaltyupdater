@@ -18,6 +18,7 @@ DEFAULT_LLM_MODEL_KEY = os.getenv("DEFAULT_LLM_MODEL_KEY", "gpt-o4-mini") # Defa
 USE_LLM_PROXY_STR = os.getenv('USE_LLM_PROXY', 'True').lower()
 USE_LLM_PROXY = USE_LLM_PROXY_STR == 'true'
 MODEL_CONFIG_PATH = os.getenv("MODEL_CONFIG_PATH") # Will be None if not set
+DEFAULT_EMBEDDING_MODEL_KEY = os.getenv("DEFAULT_EMBEDDING_MODEL_KEY", "text-embedding-ada-002") # Default fallback
 
 # GitHub Configuration (Optional - for Phase 4)
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
@@ -44,5 +45,6 @@ if not OPENAI_API_KEY:
 
 print(f"Configuration loaded:")
 print(f"- DEFAULT_LLM_MODEL_KEY: {DEFAULT_LLM_MODEL_KEY}")
+print(f"- DEFAULT_EMBEDDING_MODEL_KEY: {DEFAULT_EMBEDDING_MODEL_KEY}")
 print(f"- USE_LLM_PROXY: {USE_LLM_PROXY}")
 print(f"- BASELINE_REPORT_PATH: {BASELINE_REPORT_PATH}") 
