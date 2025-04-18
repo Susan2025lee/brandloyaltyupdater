@@ -1,3 +1,5 @@
+"""Handles the generation of text using LLMs, including significance assessment."""
+
 import sys
 import os
 from typing import Optional, List, Dict, Any

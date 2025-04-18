@@ -11,7 +11,7 @@ if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
 # --- Core Components ---
-from config import INPUT_DIR, BRAND_LOYALTY_METRICS_PATH
+from config import INPUT_DIR, BRAND_LOYALTY_METRICS_PATH, VECTOR_DB_COLLECTION_NAME
 from core.llm_interface import LLMInterface
 from ingest import ingest_documents, scan_input_directory
 from embed import generate_embeddings_for_chunks
@@ -20,9 +20,6 @@ from retrieve import retrieve_relevant_chunks
 from generate import generate_assessment_for_metric, NO_UPDATE_MARKER
 
 # --- Constants ---
-# Define the ChromaDB collection name (consider moving to config.py if used elsewhere)
-VECTOR_DB_COLLECTION_NAME = "brand_loyalty_updates"
-
 
 def get_metric_names(filepath: str = BRAND_LOYALTY_METRICS_PATH) -> List[str]:
     """Parses metric names from the brandloyalty.md file.

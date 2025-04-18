@@ -1,3 +1,5 @@
+"""Handles the generation of text embeddings for document chunks."""
+
 from typing import List, Optional, Dict
 import time
 
@@ -60,8 +62,6 @@ def generate_embeddings_for_chunks(
 
         if embedding:
             embeddings_dict[chunk_id] = embedding
-            # Optional: Add a small delay to potentially avoid hitting strict rate limits
-            # time.sleep(0.05) # Adjust as needed
         else:
             print(f"Error: Failed to generate embedding for chunk {chunk_id}. Aborting.")
             return None # Fail fast if any chunk fails

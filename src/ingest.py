@@ -1,3 +1,7 @@
+"""Handles document ingestion: scanning input files, extracting text (PDF, MD),
+and chunking text content.
+"""
+
 import os
 from pathlib import Path
 from typing import List, Optional
@@ -46,10 +50,11 @@ def extract_text_from_pdf(file_path: Path) -> Optional[str]:
     """Extracts text content from a PDF file.
 
     Args:
-        file_path (Path): The path to the PDF file.
+        file_path: The path to the PDF file.
 
     Returns:
-        str: The extracted text content. Returns an empty string if extraction fails.
+        The extracted text content as a string, or None if extraction fails
+        or the file path is invalid.
     """
     if not file_path.exists() or file_path.suffix.lower() != '.pdf':
         print(f"Error: Invalid PDF file path: {file_path}")
@@ -72,10 +77,11 @@ def extract_text_from_md(file_path: Path) -> Optional[str]:
     """Extracts text content from a Markdown file (reads as plain text).
 
     Args:
-        file_path (Path): The path to the Markdown file.
+        file_path: The path to the Markdown file.
 
     Returns:
-        str: The extracted text content. Returns an empty string if extraction fails.
+        The extracted text content as a string, or None if reading fails
+        or the file path is invalid.
     """
     if not file_path.exists() or file_path.suffix.lower() != '.md':
         print(f"Error: Invalid Markdown file path: {file_path}")
@@ -91,28 +97,34 @@ def extract_text_from_md(file_path: Path) -> Optional[str]:
 
 # --- Text Chunking --- 
 
-def get_tokenizer(model_name: str = "cl100k_base"):
-    """Gets a tiktoken tokenizer instance.
-    cl100k_base is used by gpt-4, gpt-3.5-turbo, text-embedding-ada-002
+def get_tokenizer(model_name: str = "cl100k_base") -> tiktoken.Encoding:
+    """Gets a tiktoken tokenizer instance for a specified model encoding.
+
+    Defaults to "cl100k_base" which is used by gpt-4, gpt-3.5-turbo,
+    and text-embedding-ada-002.
+
+    Args:
+        model_name: The name of the model encoding to get (e.g., "cl100k_base").
+
+    Returns:
+        A tiktoken.Encoding object for the specified model.
     """
     try:
         return tiktoken.get_encoding(model_name)
     except ValueError:
-        print(f"Warning: Encoding '{model_name}' not found. Using default encoding.")
-        # Fallback or handle error appropriately
-        # For PoC, might just use a default if primary fails, or raise error
-        return tiktoken.get_encoding("cl100k_base") # Or another common one
+        print(f"Warning: Encoding '{model_name}' not found. Using default 'cl100k_base'.")
+        return tiktoken.get_encoding("cl100k_base")
 
 def chunk_text(text: str, max_tokens: int = 500, overlap: int = 50) -> List[str]:
     """Chunks text into smaller pieces based strictly on token count.
 
     Args:
-        text (str): The input text to chunk.
-        max_tokens (int): The maximum number of tokens per chunk.
-        overlap (int): The number of tokens to overlap between chunks.
+        text: The input text to chunk.
+        max_tokens: The maximum number of tokens per chunk.
+        overlap: The number of tokens to overlap between chunks.
 
     Returns:
-        List[str]: A list of text chunks.
+        A list of text chunks.
     """
     if not text:
         return []
@@ -137,22 +149,16 @@ def chunk_text(text: str, max_tokens: int = 500, overlap: int = 50) -> List[str]
         chunks.append(chunk_text)
         
         # Move the start index for the next chunk
-        # If this is the last chunk, we're done
         if end_idx == total_tokens:
             break
         
         # Otherwise, move start_idx, subtracting overlap
         start_idx += (max_tokens - overlap)
-        # Ensure start_idx doesn't go backward due to large overlap
-        start_idx = max(start_idx, end_idx - max_tokens + 1) # Ensure progress if overlap is large
-        # A safety check, ensure start_idx doesn't go past end_idx-overlap unnecessarily
-        # This can happen if max_tokens is small and overlap large relative to it. Usually, it should point somewhere before end_idx.
-        start_idx = min(start_idx, end_idx - overlap) # Re-adjust if the previous line pushed it too far
-        # Final safety: prevent infinite loop if start_idx doesn't advance
+        start_idx = max(start_idx, end_idx - max_tokens + 1)
+        start_idx = min(start_idx, end_idx - overlap)
         if start_idx >= end_idx:
              print(f"Warning: Chunking could not advance start index. Overlap ({overlap}) might be too large for max_tokens ({max_tokens}). Breaking.")
-             break # Prevent potential infinite loop
-
+             break
 
     print(f"Chunked text into {len(chunks)} chunks using token-based splitting.")
     return chunks

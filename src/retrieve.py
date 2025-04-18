@@ -1,3 +1,5 @@
+"""Handles retrieving relevant document chunks from the vector store."""
+
 import sys
 import os
 from typing import List, Optional, Dict, Any
@@ -10,13 +12,13 @@ from vector_store import get_or_create_collection, query_collection
 from core.llm_interface import LLMInterface
 import chromadb # Used for type hinting
 
-# Define default collection name
-DEFAULT_COLLECTION_NAME = "brand_loyalty_updates"
+# Import constant for default collection name
+from config import VECTOR_DB_COLLECTION_NAME
 
 def retrieve_relevant_chunks(
     query_text: str,
     n_results: int = 5,
-    collection_name: str = DEFAULT_COLLECTION_NAME,
+    collection_name: str = VECTOR_DB_COLLECTION_NAME,
     llm_interface: Optional[LLMInterface] = None,
     collection: Optional[chromadb.Collection] = None
 ) -> Optional[List[Dict[str, Any]]]:

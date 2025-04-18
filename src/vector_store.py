@@ -1,3 +1,7 @@
+"""Manages interaction with the ChromaDB vector store, including client initialization,
+collection management, adding embeddings, and querying.
+"""
+
 import chromadb
 from chromadb.config import Settings
 from typing import Optional, List, Dict
@@ -9,7 +13,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Import necessary components directly
-from config import VECTOR_STORE_DIR
+from config import VECTOR_STORE_DIR, VECTOR_DB_COLLECTION_NAME
 from models import DocumentChunk
 from core.llm_interface import LLMInterface
 
@@ -38,7 +42,7 @@ def get_chroma_client() -> chromadb.ClientAPI:
         print("ChromaDB client initialized.")
     return _chroma_client
 
-def get_or_create_collection(collection_name: str = "brand_loyalty_updates") -> Optional[chromadb.Collection]:
+def get_or_create_collection(collection_name: str = VECTOR_DB_COLLECTION_NAME) -> Optional[chromadb.Collection]:
     """Gets or creates a ChromaDB collection.
 
     Args:

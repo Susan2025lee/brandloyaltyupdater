@@ -11,8 +11,7 @@
 | **Vector Store**       | `chromadb` (embedded mode)                    | Storing and querying embeddings locally        |
 | **LLM / Generation**   | OpenAI API (`gpt-o4-mini`)                    | Significance assessment, summary generation (via `LLMInterface`) |
 | **Review UI**          | `streamlit`                                   | Building the human review interface            |
-| **Version Control**    | Git / GitHub                                  | Code management and report versioning          |
-| **GitHub Interaction** | `PyGithub` or `GitPython`                     | Programmatic interaction with GitHub repository |
+| **Version Control**    | Git / GitHub                                  | Code management (report managed locally)     |
 | **Orchestration (PoC)**| Python `subprocess` / `schedule` or Cron      | Running the processing pipeline sequentially   |
 | **Configuration**      | `.env` files (`python-dotenv`)                | Managing API keys and settings                 |
 | **Testing**            | `pytest`                                      | Unit and integration testing framework         |
